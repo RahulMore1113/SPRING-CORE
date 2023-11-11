@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:property-placeholder location="com/rahul/commons/application.properties" />
+
+	<!-- Setter Injection to get DataSource Object -->
+	<bean id="mysqlDAO" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<bean id="hikariDataSource" class="com.zaxxer.hikari.HikariDataSource" parent="mysqlDAO">
+		<property name="JdbcUrl" value="${jdbc.url}" />
+		<property name="minimumIdle" value="10" />
+		<property name="maximumPoolSize" value="20" />
+		<property name="connectionTimeout" value="10000" />
+	</bean>
+
+	<!-- Constructor Injection to get DAO layer -->
+	<bean id="customerDAO" class="com.rahul.dao.CustomerMySQLDAOImpl">
+		<constructor-arg name="dataSource" ref="hikariDataSource" />
+	</bean>
+
+
+</beans>

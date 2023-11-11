@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.rahul.component.Student">
+		<property name="sid" value="21" />
+		<property name="sname" value="Krishna" />
+		<property name="sage" value="23" />
+		<property name="saddress" value="Heart" />
+	</bean>
+
+</beans>
